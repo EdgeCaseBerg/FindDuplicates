@@ -10,10 +10,20 @@ class FileListing(rootFolderPath: String) {
 
 	def collect : List[File] = {
 		root.listFiles.toList.map { f =>
-			if(f.isDirectory) {
+			if (f.isDirectory) {
 				new FileListing(f.getCanonicalPath()).collect
 			} else {
 				List(f)
+			}
+		}.flatten
+	}
+
+	def collectAndDo(func : (File) => Unit) : List[File] = { 
+		root.listFiles.toList.map { f => 
+			if (f.isDirectory) {
+				new FileListing(f.getCanonicalPath()).collectAndDo(func)
+			} else {
+				func(f)
 			}
 		}.flatten
 	}
