@@ -10,8 +10,8 @@ object DeDuplicator {
 
 	def add(f: File) {
 		val hash = FileHash.apply(f.getCanonicalPath())	
-		if (hashMap.contains(hashMap.hashString)) {
-			duplicates += f
+		if (hashMap.contains(hash.hashString)) {
+			duplicates = duplicates.::(f)
 		} else {
 			hashMap += (hash.hashString -> f.getCanonicalPath())
 		}
