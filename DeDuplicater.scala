@@ -17,4 +17,14 @@ object DeDuplicator {
 		}
 	}
 
+	def apply(rootFolderPath: String) {
+		val fileListing = new FileListing(rootFolderPath)
+		fileListing.collectAndDo(DeDuplicator.add)
+	}
+
+	def reset {
+		hashMap = HashMap[String, String]()
+		duplicates = List[File]()
+	}
+
 }
