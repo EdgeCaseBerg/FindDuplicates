@@ -24,6 +24,7 @@ class FileListing(rootFolderPath: String) {
 				new FileListing(f.getCanonicalPath()).collectAndDo(func)
 			} else {
 				func(f)
+				List(f)
 			}
 		}.flatten
 	}
